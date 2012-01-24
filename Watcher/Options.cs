@@ -9,16 +9,28 @@ namespace Develapp.Watcher
 {
     public sealed class Options
     {
-        [Option("t", "test", HelpText="Perform all the actions in a test mode without changing any files")]
-        public bool Test = true;
-        [Option("x", "execute", HelpText="Execute the changes to the watched files")]
-        public bool Execute = false;
+        [Option("t", "test", HelpText = "Perform all the actions in a test mode without changing any files")]
+        public bool Test { get; set; }
+        [Option("x", "execute", HelpText = "Execute. Sync changes in watched files")]
+        public bool Execute { get; set; }
+        [Option("l", "list", HelpText = "List matching files")]
+        public bool List { get; set; }
 
-        [HelpOption(
-                    HelpText = "Dispaly this help screen.")]
+        [OptionList("t", "targets", ';', HelpText="Watched locations separated by ;")]
+        public List<string> Targets { get;set;}
+
+        public Options()
+        {
+            Test = true;
+            Execute = false;
+            List = false;
+            Targets = new List<string>();
+        }
+
+        [HelpOption(HelpText = "Dispaly this help text.")]
         public string GetUsage()
         {
-            var help = new HelpText("sampleapp", "1.8");
+            var help = new HelpText("watcher", "0.1");
             help.AdditionalNewLineAfterOption = true;
             help.Copyright = new CopyrightInfo("Develapp", 2012, 2012);
             help.AddPreOptionsLine("This is free software. You may redistribute copies of it under the terms of");
@@ -31,5 +43,6 @@ namespace Develapp.Watcher
 
             return help;
         }
+
     }
 }

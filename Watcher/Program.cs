@@ -15,6 +15,17 @@ namespace Develapp.Watcher
             if (!parser.ParseArguments(args, options))
                 Environment.Exit(1);
 
+            //for testing only
+            options.Targets = new List<string>() { @"C:\Test1\", @"C:\Test2" };
+
+            Watcher watcher = new Watcher(options);
+
+            foreach (string s in watcher.CompareTargets())
+            {
+                Console.WriteLine(s);
+            }
+            
+
             Environment.Exit(0);
         }
     }
