@@ -1,0 +1,10 @@
+obj/
+bin/
+Watcher/bin/
+*/obj/*
+*.suo
+*.csproj.user
+*.rar
+*.zip
+*.7z
+
